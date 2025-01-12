@@ -45,6 +45,7 @@ html can check for length
           name="surname"
           id="surname"
           placeholder="Enter Surname"
+          #usersurname="ngModel"
           [(ngModel)]="user.surname"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 
@@ -59,6 +60,7 @@ html can check for length
           name="email"
           id="email"
           placeholder="Enter Email"
+          #useremail="ngModel"
           [(ngModel)]="user.email"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 
@@ -73,6 +75,7 @@ html can check for length
           name="password"
           id="password"
           placeholder="Enter Password"
+          #userPassword="ngModel"
           [(ngModel)]="user.password"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           required
