@@ -27,7 +27,7 @@ export class UserFormComponent{
 
   constructor(private userService: UserServices){}
 
-  onSubmit(){
+  onSubmit(form:NgForm){
 
 
 

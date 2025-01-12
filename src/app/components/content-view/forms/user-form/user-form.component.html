@@ -1,17 +1,20 @@
-<!--Tail wind css not added yet
-use angular validation form
-html can check for length
+<!--
+    Using Template-Driven Forms
 -->
 
-<!--For placement and blurring background-->
+<!--For placement-->
 <div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
   <!--For position and layout-->
   <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 box">
 
+    <!--Form title-->
     <h2 class="text-2xl font-bold text-blue-600 md-6 text-center">Sign Up</h2>
-    <form #userForm="ngForm" (ngSubmit)="onSubmit()"  class="space-y-6">
 
-      <div class="form-group">
+    <!--Form-->
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)"  class="space-y-6">
+
+      <!--      Name Field      -->
+      <div>
         <label for="username" class="block mb-1">Name</label>
         <input
           type="text"
@@ -29,16 +32,18 @@ html can check for length
           required
         >
 
-        <!--Real Time Validation messages-->
-        <div class="text-red-500 text-sm mt-1" *ngif="username.invalid && (username.dirty || username.touched)">
-          <p *ngIf="username.errors?.['required']">Name is required</p>
-
-          <p *ngIf="username.errors?.['minlength']">Name must be at least 2 characters long</p>
-        </div>
+        <!--    Real Time Validation messages   -->
+          <div class="text-red-500 text-sm mt-1" *ngIf="username.invalid && (username.dirty || username.touched)">
+            <p *ngIf="username.errors?.['required']">Name is required</p>
+            <p *ngIf="username.errors?.['minlength']">Name must be at least 2 characters long</p>
+          </div>
+        <!--        End of Validation       -->
 
       </div>
+      <!--    End of Name Feild     -->
 
       <div>
+      <!--      Surame Field      -->
         <label for="surname">Surname</label>
         <input
           type="text"
@@ -51,9 +56,19 @@ html can check for length
 
           required
         >
+
+        <!--Surname field validation-->
+          <div *ngIf="usersurname.invalid && (usersurname.touched || usersurname.dirty)">
+            <p *ngIf="usersurname.errors?.['required']" class="text-red-700 text-sm">Surname is required</p>
+          </div>
+        <!--End of Field validation-->
+
+      <!--    End of Surname Field     -->
       </div>
 
+
       <div>
+      <!--    Email Field   -->
         <label for="email">Email</label>
         <input
           type="email"
@@ -63,12 +78,22 @@ html can check for length
           #useremail="ngModel"
           [(ngModel)]="user.email"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-
+          email
           required
         >
+
+        <!--Email Validation-->
+          <div *ngIf="useremail.valid && (useremail.touched || useremail.dirty)">
+            <p *ngIf="useremail.errors?.['required']">Email is required</p>
+            <p *ngIf="useremail.errors?.['email']">Please enter a valid email address</p>
+          </div>
+        <!--End of Eamil Validation-->
+
+      <!--    End of Email Feild     -->
       </div>
 
       <div>
+      <!-- Password Field -->
         <label for="password">Password</label>
         <input
           type="password"
@@ -79,21 +104,37 @@ html can check for length
           [(ngModel)]="user.password"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           required
+          minlength="8"
         >
+
+        <!-- Password Validation -->
+          <div *ngIf="userPassword.invalid && (userPassword.dirty || userPassword.touched)">
+            <p *ngIf="userPassword.errors?.['minlength']">
+              Password must be atleast 8 characters long
+            </p>
+
+            <p *ngIf="userPassword.errors?.['required']">
+              Password is required
+            </p>
+          </div>
+        <!-- End of Pass word Validation-->
+
+      <!--    End of Surname Feild     -->
       </div>
 
-
-        <button
-          type="submit"
-          [disabled]="!userForm.valid"
-          [ngClass]="{
-            'bg-blue-600 hover:bg-blue-700': userForm.valid,
-            'bg-gray-400 cursor-not-allowed': !userForm.valid
-          }"
-          class=" bg-blue-600 text-white  py-2 px-4 rounded-md transition-colors duration-200"
-        >
-          Save
-        </button>
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="!userForm.valid"
+        [ngClass]="{
+          'bg-blue-600 hover:bg-blue-700': userForm.valid,
+          'bg-gray-400 cursor-not-allowed': !userForm.valid
+        }"
+        class=" bg-blue-600 text-white  py-2 px-4 rounded-md transition-colors duration-200"
+      >
+        Save
+      </button>
+      <!--    End of Submit Button     -->
     </form>
   </div>
 </div>

@@ -2,7 +2,7 @@
   <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
     <h2 class="text-2xl font-bold text-blue-600 mb-6 text-center">New Task</h2>
 
-    <form (ngSubmit)="onSubmit()" #newTaskForm="ngForm" class="space-y-6">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()"class="space-y-6">
       <div>
         <label for="name" class="block text-sm font-medium text-blue-700 mb-1">
           Name
@@ -11,24 +11,16 @@
           type="text"
           id="name"
           name="name"
-          [(ngModel)]="formData.name"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Enter your name"
+          formControlName="taskName"
         >
-      </div>
 
-      <div>
-        <label for="email" class="block text-sm font-medium text-blue-700 mb-1">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="formData.email"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="Enter your email"
-        >
+        <div *ngIf="taskForm.get('taskName')?.touched && taskForm.get('taskName')?.invalid">
+          <div *ngIf="taskForm.get('taskName')?.errors?.['required']">
+            <p>Task Name is required</p>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -39,10 +31,15 @@
           id="message"
           name="message"
           rows="4"
-          [(ngModel)]="formData.message"
           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="Enter your message"
+          formControlName="taskMessage"
         ></textarea>
+
+        <div *ngIf="taskForm.get('taskMessage')?.touched && taskForm.get('taskMessage')?.invalid">
+          <p *ngIf="taskForm.get('taskMessage')?.errors?.['required']">This field can not be empty</p>
+          <p *ngIf="taskForm.get('taskMessage')?.errors?.['maxLength']">This fields exeeds maximum charactors</p>
+        </div>
       </div>
 
       <div>
@@ -50,22 +47,18 @@
           Severity
         </label>
 
-        <select name="severity" id="Task severity" class="w-full  bg-gray-50 ">
+        <select name="severity" id="Task severity" class="w-full  bg-gray-500 cursor-pointer">
           <option value="" >Pick Option</option>
-          <option value="low" >Low Severity</option>
-          <option value="medium" >Medium severity</option>
-          <option value="high" >High severity</option>
+          <option></option>
         </select>
       </div>
 
-      <div>
         <button
           type="submit"
           class=" bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 "
         >
           Add Task
         </button>
-      </div>
     </form>
   </div>
 </div>
