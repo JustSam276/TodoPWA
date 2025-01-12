@@ -1,0 +1,14 @@
+
+<div *ngIf="tasks$ | async as tasks">
+  <div *ngFor="let task of tasks">
+    {{ task.taskName}}
+  </div>
+</div>
+
+<div>
+  @if (tasks$ | async ) {
+    @for (item of [tasks$]; track $index) {
+      {{ item }}
+    }
+  }
+</div>
